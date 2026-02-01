@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend-container
+        # 1. Matches your local image name
+        image: devops-master-project-frontend:latest 
+        # 2. Ensures Minikube uses the image you 'loaded' into it
+        imagePullPolicy: IfNotPresent 
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  # In Minikube, this will stay 'pending' until you run 'minikube tunnel'
+  type: LoadBalancer 
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
