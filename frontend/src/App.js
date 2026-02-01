@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>Task Managers (DevOps )</h1>
+      <h1>Task Managers Checked (DevOps )</h1>
       <input placeholder="Title" value={form.title} onChange={e => setForm({...form, title: e.target.value})} />
       <input placeholder="Desc" value={form.description} onChange={e => setForm({...form, description: e.target.value})} />
       <button onClick={addTask}>Add Task</button>
